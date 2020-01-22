@@ -5,3 +5,7 @@ It enables every type of control including:
 - On/Off function
 - Brightness function
 - Color function
+
+
+This project uses:
+- ESP 8266 v3
