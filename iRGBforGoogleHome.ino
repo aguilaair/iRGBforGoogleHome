@@ -2,9 +2,10 @@
 #include <Arduino.h>
 #include <ESP8266WiFi.h>
 #include <ESP8266WiFiMulti.h>
-#include <WebSocketsClient.h> //  https://github.com/kakopappa/sinric/wiki/How-to-add-dependency-libraries 
-#include <ArduinoJson.h> // https://github.com/kakopappa/sinric/wiki/How-to-add-dependency-libraries
+#include <WebSocketsClient.h>
+#include <ArduinoJson.h>
 #include <math.h>
+#include <EEPROM.h> 
 
 ESP8266WiFiMulti WiFiMulti;
 WebSocketsClient webSocket;
@@ -19,6 +20,12 @@ int red = 255;
 int green = 255;
 int blue = 255;
 float brightness = 1;
+
+int R_Addr = 0;
+int G_Addr = 5;
+int B_Addr = 10;
+int Br_Addr = 15;
+
 
 
 
@@ -156,6 +163,10 @@ void RGB_color(int red_light_value, int green_light_value, int blue_light_value)
   analogWrite(red_light_pin, (red_light_value * brightness));
   analogWrite(green_light_pin, (green_light_value * brightness));
   analogWrite(blue_light_pin, (blue_light_value * brightness));
+  EEPROM.put(R_Addr, red_light_value);
+  EEPROM.put(G_Addr, blue_light_value);
+  EEPROM.put(B_Addr, green_light_value);
+  EEPROM.put(Br_Addr, brightness);
 }
 
 void setup() {
@@ -164,6 +175,11 @@ void setup() {
   pinMode(red_light_pin, OUTPUT);
   pinMode(green_light_pin, OUTPUT);
   pinMode(blue_light_pin, OUTPUT);
+
+  EEPROM.get(R_Addr, red);
+  EEPROM.get(G_Addr, green);
+  EEPROM.get(B_Addr, blue);
+  EEPROM.get(Br_Addr, brightness);
 
   RGB_color(red, green, blue);
 
