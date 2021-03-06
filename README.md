@@ -1,3 +1,5 @@
+#Project Deprecated, please see https://github.com/aguilaair/NebulaSmartLights
+
 # iRGBforGoogleHome
 
 Welcome this project houses a simple but useful tool to control an RGB LED with Google Home using https://sinric.com/ as a back-end.
